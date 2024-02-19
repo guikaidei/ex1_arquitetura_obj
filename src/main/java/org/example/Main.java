@@ -65,6 +65,7 @@ public class Main {
 
                 System.out.println("Digite o nome do item:");
                 String nomeItem = scanner.nextLine();
+                nomeItem = scanner.nextLine();
 
                 System.out.println("Digite o preço do item:");
                 double precoItem = scanner.nextDouble();
