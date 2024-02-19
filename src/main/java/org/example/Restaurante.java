@@ -7,18 +7,21 @@ public class Restaurante {
 
     double avaliacao;
 
-    ArrayList<Object> cardapio = new ArrayList<>();
+    ArrayList<Item> cardapio = new ArrayList<>();
 
     public Restaurante(String nome, double avaliacao) {
         this.nome = nome;
         this.avaliacao = avaliacao;
     }
 
-    void adicionarItem(Object item) {
+    void adicionarItem(Item item) {
         cardapio.add(item);
     }
 
     void imprimirMenu() {
-        System.out.println(cardapio);
+        for (int i = 0; i < cardapio.size(); i++) {
+            System.out.println("- Item: " + cardapio.get(i).nome);
+            System.out.println("  Preço: " + cardapio.get(i).preco);
+        }
     }
 }

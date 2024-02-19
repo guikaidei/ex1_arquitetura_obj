@@ -1,13 +1,19 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<String> restaurantes = new ArrayList<>();
+        ArrayList<Restaurante> restaurantes = new ArrayList<>();
+        boolean primeiraInteracao = true;
         while (true) {
+            if (primeiraInteracao = false) {
+                System.out.println("");
+            }
+
             System.out.println("Menu principal:");
             System.out.println("1. Cadastrar restaurante");
             System.out.println("2. Listar restaurantes");
@@ -19,38 +25,65 @@ public class Main {
             String opcao = scanner.nextLine();
 
             if (opcao.equals("1")) {
+                System.out.println("");
+
                 System.out.println("Digite o nome do restaurante: ");
                 String nomeRestaurante = scanner.nextLine();
 
                 System.out.println("Digite a avaliação do restaurante: ");
                 Double avaliacaoRestaurante = scanner.nextDouble();
 
-
                 Restaurante restaurante = new Restaurante(nomeRestaurante, avaliacaoRestaurante);
 
+                restaurantes.add(restaurante);
+
                 System.out.println("Restaurante " + restaurante.nome + " cadastrado com sucesso!");
-                break;
+                System.out.println("");
+
             } else if (opcao.equals("2")) {
+                System.out.println("");
                 System.out.println("Restaurantes cadastrados: ");
-                //falta tudo
+
+                for (int i = 0; i < restaurantes.size(); i++) {
+                    System.out.println(i + 1 + ". " + restaurantes.get(i).nome);
+                    System.out.println("Avaliação: " + restaurantes.get(i).avaliacao);
+                    restaurantes.get(i).imprimirMenu();
+                    System.out.println("");
+                }
+
             } else if (opcao.equals("3")) {
+                System.out.println("");
+                System.out.println("Restaurantes:");
+
+                for (int i = 0; i < restaurantes.size(); i++) {
+                    System.out.println(i + 1 + ". " + restaurantes.get(i).nome);
+                }
+
                 System.out.println("Escolha o número do restaurante para adicionar um item ao menu: ");
                 Integer escolha = scanner.nextInt();
-                Object restauranteEscolhido = restaurantes.get(escolha); // era pra ser uma lista?
-                System.out.println("Digite o nome do item: ");
+                escolha -= 1;
+
+                System.out.println("Digite o nome do item:");
                 String nomeItem = scanner.nextLine();
-                System.out.println("Digite o preço do item: ");
-                Double precoItem = scanner.nextDouble();
+
+                System.out.println("Digite o preço do item:");
+                double precoItem = scanner.nextDouble();
+
                 Item item = new Item(nomeItem, precoItem);
-                restauranteEscolhido.adicionarItem(item); // era pra ser uma lista?
-                String.format("Item %s, adicionado ao menu do restaurante, %d!", nomeItem, restauranteEscolhido.nome);
-                System.out.println();
+                restaurantes.get(escolha).adicionarItem(item);
+
+                System.out.println("Item " + nomeItem + " adicionado ao menu do restaurante: " + restaurantes.get(escolha).nome);
+
+                System.out.println("");
+
             } else if (opcao.equals("4")) {
                 System.out.println("Obrigado por utilizar o sistema de cadastro de restaurantes!");
                 break;
             } else {
                 System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
             }
+
+
         }
     }
 }
